@@ -8,23 +8,22 @@
 		};
 		function calcFactorial(myNum) { 
             // calculate the factorial and return that value
-            if (myNum === 0 || myNum === 1)
-                return 1;
-            for (var i = myNum - 1; i >= 1; i--) {
-                myNum *= i;
-            }
+            var fact = 1;
+			for (var i=1; i<=myNum; i++) {
+				fact = fact*i;
+			}
+			return fact;
 		}
 		function calculate() { 
 			// get the number entered into the text box myNum
+			var myNum = $("myNum").value;
 			// call the factorial function
+			var myFactorial = calcFactorial(myNum);
             // calculate the square of the number
-            // display those values in the proper place in the HTML 
-            document.getElementById("myNum");
-            function calcFactorial(mySquare); {
-                math.pow(myNum,2);
-                document.getElementById("myNum").innerHTML = myNum;
-                document.getElementById("mySquare").innerHTML = mySquare;
-            }
+			var mySquare = myNum * myNum;
+            // display those values in the proper place in the HTML
+			$('myFactorial').value = myFactorial;
+			$('mySquare').value = mySquare; 
 		}
 		window.onload = function() {
 		    $("goCalculate").onclick = calculate; 
