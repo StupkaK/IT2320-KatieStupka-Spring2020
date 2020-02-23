@@ -5,34 +5,74 @@
         .blacktext {color:black;}
         .redtext {color:red;}
     </style>
-	<script>
-        "use strict";
-        var $ = function(id) { return document.getElementById(id); };
-        //marital status married? enable spouse name field
-		if ("mstatus"=="married") {
-            $("sname").disabled = false;
-        } else{
-            $("sname").disabled = true;
-        }
-        //form validation
-        if (fname !='' && lname !='' && address !='' && city !='' && state !='' && zipcode !='' && gender !='' && dob !='' && mstatus !='' && email !='' && phone !='' && password !='' && password2 !='') {
-            return true;
-        } else {
-            alert("Please correct the following errors:");
-            return false;
-        }
-        //reset form event handler
-        function myFunction() {
-            document.getElementById("myForm").reset();
+	<script type="text/javascript">
+        //set focus to first name box on load
+        window.onload = function() {
+            document.getElementById('fname').focus();
+        };
+
+        //event for maritialStatus drop down
+        $('mstatus').onchange=mstatusChange;
+
+        //event for submit button
+        $('submit').onclick=processForm;
+
+        function mstatusChange() {
+            if(mstatus=='Married')
+                $('sname').disabled=false;
+            else
+                $('sname').disabled=true;
         }
 
+        function processForm() {
+            var lname=$('lname').value;
+            var fname=$('fname').value;
+            var address1=$('address1').value;
+            var address2=$('address2').value;
+            var city=$('city').value;
+            var zipcode=$('zipcode').value;
+            var state=$('state').value;
+            var gender=$('gender').value;
+            var dob=$('dob').value;
+            var mstatus=$('mstatus').value;
+            var sname=$('sname').value;
+            var email=$('email').value;
+            var phone=$('phone').value;
+            var password=$('password').value;
+            var password2=$('password2').value;
+
+            var formGood=true;
+
+            if(lname=="") {
+                formGood=false;
+                $('lnameLabel').className='redtext';
+            } else {
+                $('lnameLabel').className='blacktext';
+            }
+
+            if(password!=password2) {
+                formGood=false;
+                $(passwordLabel).className='redtext';
+            } else {
+                $(passwordLabel).className='blacktext';
+            }
+
+            if(formGood) {
+                $("myForm").submit();
+            } else {
+                $('errorMsg').innerHTML="Please fix the errors below";
+            }
+        }
 	</script>
 </head> 
-<body OnLoad="document.fname.focus();">
+<body>
 	<main>
-        <h2><span id="errorMesg"> </span></h2>
-        <h2>Registration Form</h2> 
-        <form action="http://www.waynedog.net/formreader.php" method="post">
+        <h2 id='errorMsg' class='redtext'></h2>
+
+        <h2>Registration Form</h2>
+
+        <form id="myForm" action="http://www.waynedog.net/formreader.php" method="post"></form>
+            
 		<label for="fname">First Name</label>
 		<input type="text" id="fname" class="blacktext" required><br>
         <br/>
@@ -120,7 +160,7 @@
         <br/>
         <br/>
         <label for="mstatus">Marital Status</label>
-            <select id="mstatus" class="blacktext" required>
+            <select id="mstatus" class="blacktext" onchange="mstatusChange()" required>
             <option value="single">Single</option>
             <option value="married">Married</option>
             </select>
@@ -145,9 +185,9 @@
         <input type="password" id="password2" class="blacktext" required>
         <br/>
         <br/>
-        <input type="submit" value="Submit"><br>
+        <input type="submit" value="Submit" onclick="processForm()"><br>
         <br>
-        <input type="button" onclick="myFunction()" value="Reset">
+        <input type="button" value="Reset">
         </form>
 
 
