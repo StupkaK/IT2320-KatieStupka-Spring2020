@@ -1,0 +1,45 @@
+<html>
+<head>
+    <title>Lab 7 - Stupka</title> 
+    <style>
+        .slider {
+            width: 90%;
+            height: 500px;
+            margin: 20px auto;
+        }
+    </style>
+</head> 
+<body>
+	<main>
+        <h2>Katie Stupka - IT 2320 - Lab 7</h2>
+        <p><center>
+            Timer (seconds): <input type="text" id="timerVal" value="5"><br/><br/>
+        <div class="slider">
+            <div id="img">
+                <img src="images/adams.jpg">
+            </div>
+        </div>
+        <h2 id="timerCount">5</h2>
+	    </center></p>
+	</main> 
+</body>  
+
+<script>
+    var img = document.getElementById("img");
+    var images = ["images/adams.jpg", "images/jackson.jpg", "images/jefferson.jpg", "images/madison.jpg", "images/washington.jpg"]
+    var x = 0;
+
+    function slide() {
+        if (x<images.length) {
+            x = x+1;
+        } else {
+            x = 1;
+        }
+        img.innerHTML = "<img src="+images[x-1]+">";
+    }
+
+    setInterval(slide, 5000);
+
+    var x = document.getElementById("timerVal").value;
+</script>
+</html>
