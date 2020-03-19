@@ -91,7 +91,7 @@
 			// selected what operation
 			// let's disable the action (+ - * /) keys
 			// *** For the action keys (class=actionKey) change the class to disableKey so the keys are grayed out
-			$('actionKey').toggleClass('disableKey');
+			$('.actionKey').attr('class', 'disableKey');
 
 	      } else {
 	         keyStr += cKey;
@@ -131,7 +131,7 @@
 			step = 1;
 			// we had grayed out the action keys (+ - * /) earlier
 			// *** set the class on the action keys back to the class actionKey
-			$('disableKey').toggleClass('actionKey');
+			$('.disableKey').attr('class', 'actionKey');
             
 		} else if (!isNaN(cKey)) {
 		     // they clicked on a number key
