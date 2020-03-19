@@ -15,8 +15,8 @@
         <p><center>
             Timer (seconds): <input type="text" id="timerVal" value="5"><br/><br/>
         <div class="slider">
-            <div id="img">
-                <img src="images/adams.jpg">
+            <div>
+                <img src="images/adams.jpg"  id="img">
             </div>
         </div>
         <h2 id="timerCount">5</h2>
@@ -25,21 +25,57 @@
 </body>  
 
 <script>
+    var counter, timer, countdownTimer, imageCount;
     var img = document.getElementById("img");
-    var images = ["images/adams.jpg", "images/jackson.jpg", "images/jefferson.jpg", "images/madison.jpg", "images/washington.jpg"]
-    var x = 0;
+    var images = [];
+    //var x = 0;
 
     function slide() {
-        if (x<images.length) {
-            x = x+1;
-        } else {
-            x = 1;
-        }
-        img.innerHTML = "<img src="+images[x-1]+">";
+	    counter = document.getElementById('timerVal').value;
+		var activeImage = document.getElementById("img");
+		document.getElementById('timerCount').innerHTML = counter;
+		imageCount = (imageCount+1) % images.length;
+		activeImage.src = images[imageCount];
+		
+        //if (x<images.length) {
+        //    x = x+1;
+        //} else {
+        //    x = 1;
+        //}
+        //img.innerHTML = "<img src="+images[x-1]+">";
     }
+	function countdown() {
+		counter--;
+		document.getElementById("timerCount").innerHTML = counter;
+	}
+	function timerChange() {
+		clearInterval(timer);
+		counter = document.getElementById("timerVal").value;
+		clearInterval(countdownTimer);
+		countdownTimer = setInterval(countdown, 1000);
+		document.getElementById("timerCount").innerHTML = counter;
+		timer = setInterval(slide, (counter * 1000));
+		}
+	
+	window.onload = function() {
+	    images = ["images/adams.jpg", "images/jackson.jpg", "images/jefferson.jpg", "images/madison.jpg", "images/washington.jpg"]
+	    counter = document.getElementById('timerVal').value;
+		var i, displayImage;
+		for ( i = 0; i < images.length; i++ ) {
+			displayImage = new Image();
+			displayImage.src = images[i];
+		}
+	
+		imageCount = 0;
 
-    setInterval(slide, 5000);
+		countdownTimer = setInterval(countdown, 1000);
+		timer = setInterval(slide, (counter * 1000));
+		document.getElementById("timerVal").onchange = timerChange;
+		
+	}
 
-    var x = document.getElementById("timerVal").value;
+    //setInterval(slide, 5000);
+
+    //var x = document.getElementById("timerVal").value;
 </script>
 </html>
