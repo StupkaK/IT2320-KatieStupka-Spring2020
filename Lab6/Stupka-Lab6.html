@@ -103,13 +103,6 @@
                 $('mstatusLabel').className='blacktext';
             }
 
-            if(sname=="") {
-                formGood=false;
-                $('snameLabel').className='redtext';
-            } else {
-                $('snameLabel').className='blacktext';
-            }
-
             if(email=="") {
                 formGood=false;
                 $('emailLabel').className='redtext';
@@ -162,12 +155,12 @@
 
         <h2>Registration Form</h2>
 
-        <!---<form id="myForm" action="http://www.waynedog.net/formreader.php" method="post">--->
-        <form id="myForm"> 
+        <form id="myForm" action="http://www.waynedog.net/formreader.php" method="post">
+        <!---<form id="myForm">---> 
 		<table>
             <tr>
                 <td><label id="fnameLabel">First Name:</label><input type="text" id="fname" name="fname"></td>
-		        <td><label id="lnameLabel">Last Name:</label><input type="text" id="lname" name="fname"></td>
+		        <td><label id="lnameLabel">Last Name:</label><input type="text" id="lname" name="lname"></td>
             </tr>
             <tr>
                 <td><label id="address1Label">Address:</label><input type="text" id="address1" name="address1"></td>
@@ -236,19 +229,19 @@
             </tr>
             <tr>
                 <td>
-                    <input type="radio" id="genderLabel" class="blacktext">
+                    <input type="radio" id="genderLabel" class="blacktext" name="gender">
                     <label id="gender">Male</label><br>
-                    <input type="radio" id="genderLabel" class="blacktext">
+                    <input type="radio" id="genderLabel" class="blacktext" name="gender">
                     <label id="gender">Female</label><br>
-                    <input type="radio" id="genderLabel" class="blacktext">
+                    <input type="radio" id="genderLabel" class="blacktext" name="gender">
                     <label id="gender">Other</label>
                 </td>
                 <td><label id="dobLabel">Birthdate:</label><input type="date" id="dob" name="dob"></td>
             </tr>
             <tr>
                 <td>
-                    <label for="mstatusLabel">Marital Status:</label>
-                        <select id="mstatus">
+                    <label id="mstatusLabel" for="mstatusLabel">Marital Status:</label>
+                        <select id="mstatus"name="mstatus">
                         <option>Please select</option>
                         <option value="single">Single</option>
                         <option value="Married">Married</option>
@@ -265,7 +258,7 @@
 		        <td><label id="password2Label">Confirm Password:</label><input type="password" id="password2" name="password2"></td>
             </tr>
             <tr>
-                <td><input type="submit" value="Submit" onclick="processForm()"></td>
+                <td><input type="button" value="Submit" onclick="processForm()"></td>
                 <td><input type="button" value="Reset" onClick="this.form.reset()"></td>
             </tr>
         </table>
