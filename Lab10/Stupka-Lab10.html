@@ -1,25 +1,42 @@
 <html>
 <head> 
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
 function myFunction() {
-    var x = document.getElementById("fullname");
-    x.value = x.value.toUpperCase();
+    var x = $("#fullname").val();
+    $("#fullname").val(x.toUpperCase());
 }
 
-function sameShippingInfo(){
-    if (document.forms[0].elements[4].checked==true) {
-        document.forms[0].shipAddress.value = document.forms[0].billAddress.value;
-        document.forms[0].shipCity.value = document.forms[0].billCity.value;
-        document.forms[0].shipState.value = document.forms[0].billState.value;
-        document.forms[0].shipZip.value = document.forms[0].billZip.value;
-    }
-    else {
-        document.forms[0].shipAddress.value = "";
-        document.forms[0].shipCity.value = "";
-        document.forms[0].shipState.value = "";
-        document.forms[0].shipZip.value = "";
-    }
+function sameShippingInfo() {
+     if ($("#useShipAddress").is(":checked")) {
+	    var shipAddress = $("#shipAddress").val();
+        $("#billAddress").val(shipAddress);
+		$("#billAddress").attr("disabled", true);
+
+		var shipCity = $("#shipCity").val();
+        $("#billCity").val(shipCity);
+		$("#billCity").attr("disabled", true);
+
+		var shipState = $("#shipState").val();
+        $("#billState").val(shipState);
+		$("#billState").attr("disabled", true);
+
+		var shipZip = $("#shipZip").val();
+        $("#billZip").val(shipZip);
+		$("#billZip").attr("disabled", true);
+	} else {
+		$("#billAddress").attr("disabled", false);
+		$("#billCity").attr("disabled", false);
+		$("#billState").attr("disabled", false);
+		$("#billZip").attr("disabled", false);
+	}
 }
+
+function countChar() {
+      var text = $("#comment").val();
+	  var remaining = 250 - text.length;
+	  $("#msgArea").html(remaining + " characters<br/>remaining");
+   }
 </script>
 <style>
    .graybackground {background-color:#DDDDDD;}
@@ -174,7 +191,7 @@ function sameShippingInfo(){
 	</tr>
 	<tr>
 	    <td><strong><span id="msgArea">0 characters<br/>remaining</span></strong></td>
-		<td><textarea id="comment" maxlength="250" rows="5" cols="50"></textarea></td>
+		<td><textarea id="comment" maxlength="250" rows="5" cols="50" onkeyup="countChar()"></textarea></td>
 		<tr>
 		   <td><input type="reset" id="reset" name="reset" value="Reset"></td>
            <td><input type="submit" id="submit" name="submit" value="Submit"></td>
