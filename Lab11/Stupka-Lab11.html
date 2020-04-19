@@ -1,9 +1,6 @@
 <html>
 <head>
 <script>
-	function countWords(str) {
-		return textArea.trim().split(/\s+/).length;
-	}
 </script>
 <style>
   table { border-collapse: separate;
@@ -11,8 +8,44 @@
 </style>
 </head>
 <body>
+<script type="text/javascript">
+	function fun() {
+		var search=document.getElementById('searchChar').value;
+		var textarea=document.getElementById('textArea').value;
+		var numDays=document.getElementById('numDays').value;
+		var words=1,no_of_occur=0;
+		var x="";
+
+		numDays=parseInt(numDays);
+		var date=new Date();
+		date.setDate(date.getDate()+numDays);
+		var dd=date.getDate();//date of the new date
+		var mm=date.getMonth()+1;//month of the date
+		var yyyy=date.getFullYear();//year of the date
+
+		if(dd<10)
+			dd='0'+dd;
+		if(mm<10)
+			mm='0'+mm;
+		for(i=0;i<textarea.length;i++){
+			if(textarea[i]==' ')
+				words++;
+		if(textarea[i]==search.toUpperCase() || textarea[i]==search.toLowerCase())
+			no_of_occur++;
+		else
+			x+=textarea[i];
+	}
+
+		document.getElementById('numWords').innerHTML=""+words;
+		document.getElementById('numOccur').innerHTML=""+no_of_occur;
+		document.getElementById('allCaps').innerHTML=textarea.toUpperCase();
+		document.getElementById('searchRemove').innerHTML=x;
+		document.getElementById('addDate').innerHTML=mm+"/"+dd+"/"+yyyy;
+		return false;
+		}
+		</script>
 <h2>Lab 11 - Working with Strings and Dates<br /></h2>
-<form>
+<form onsubmit="return fun();">
 <table>
 	<tr>
 		<td>Select the <strong>Search Character</strong>:</td><td><select id="searchChar">
@@ -55,23 +88,23 @@
 	</tr>
     <tr>
 	    <td>Number of words entered:</td>
-	    <td> **** </td>
+	    <td id="numWords"> **** </td>
 	</tr>
 	<tr>
 	    <td>Number of occurances of the search character:</td>
-	    <td> **** </td>
+	    <td id="numOccur"> **** </td>
 	</tr>
     <tr>
 	    <td>Display the entered text in <strong>ALL CAPS</strong>:</td>
-	    <td> **** </td>
+	    <td id="allCaps"> **** </td>
 	</tr>
     <tr>
 	    <td>Display the entered text with the search character <strong>removed</strong>:</td>
-	    <td> **** </td>
+	    <td id="searchRemove"> **** </td>
 	</tr>
     <tr>
 	    <td>Add the number of days in Date Modifier to the current date<br/>Display the resulting date as MM/DD/YYYY:</td>
-	    <td> **** </td>
+	    <td id="addDate"> **** </td>
 	</tr>
 	<tr>
 		   <td><input type="reset" id="reset" name="reset" value="Reset"></td>
@@ -81,5 +114,4 @@
 </table>
 </form>
 </body>
-
 </html>
