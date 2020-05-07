@@ -1,0 +1,60 @@
+<html>
+<head>
+<title>Lab 13</title>
+</head>
+<body>
+<h2>Part 2</h2>
+<form>
+First name: <input type="text" name="fname" id="fname">
+<br /><br />
+Last name: <input type="text" name="lname" id="lname">
+<br /><br />
+Address: <input type="text" name="address1" id="address1">
+<br /><br />
+Suite or Apt: <input type="text" name="address2" id="address2">
+<br /><br />
+City: <input type="text" name="city" id="city">
+<br /><br />
+ZIP code: <input type="text" name="zipcode" id="zipcode">
+<br /><br />
+<input type="reset" id="resetForm" value="Reset" onclick="Reset()">
+<button type="button" onclick="Get()">Submit</button>
+<br /><br />
+<strong>My Array Output</strong><br/>
+<span id="results"></span>
+</form>
+<script>
+function Get()
+{
+var array="";
+var fname=document.getElementById("fname").value;
+var lname=document.getElementById("lname").value;
+var address1=document.getElementById("address1").value;
+var address2=document.getElementById("address2").value;
+var city=document.getElementById("city").value;
+var zipcode=document.getElementById("zipcode").value;
+var formS = {'fname' :fname,'lname':lname,'address1':address1,'address2':address2,'city':city,'zipcode':zipcode};
+var keys=" ";
+var caparray=" ";
+for(var i in formS)
+{
+array=array+i + " : " + formS[i] + " ";
+caparray=caparray+i + " : " + formS[i].toUpperCase() + " ";
+keys=keys+i+" ";
+}
+
+var lines = document.createElement("results");
+lines.textContent = "Key values of an associative Array: "+keys+"\n";
+lines.textContent +="Key value pairs of an associative array: "+ array+"\n";
+lines.textContent+="Key value pair after capitalizing the value of an associative array: "+caparray;
+
+document.body.appendChild(lines);
+}
+function Reset()
+{
+document.getElementById("resetForm").reset();
+}
+
+</script>
+</body>
+</html>
